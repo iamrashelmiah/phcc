@@ -70,6 +70,7 @@
             transition: all 0.5s ease;
             display: flex;
             flex-direction: column;
+            scroll-behavior: smooth;
         }
 
         @keyframes gradientAnimation {
@@ -161,6 +162,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Fixed Navbar Styles */
         .navbar {
             background: var(--nav-bg);
             backdrop-filter: blur(20px);
@@ -410,6 +412,7 @@
             opacity: 0.6;
         }
 
+        /* Fixed Calculator Styles */
         .calculator-display {
             width: 100%;
             padding: 20px;
@@ -437,7 +440,7 @@
 
         .calc-btn {
             border: none;
-            border-radius: 12px;
+            border-radius: 50%; /* Changed to circle */
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
             font-size: 1.2rem;
@@ -450,6 +453,7 @@
             min-height: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .calc-btn::before {
@@ -470,6 +474,12 @@
         .calc-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .calc-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .calc-btn.operator {
@@ -498,6 +508,7 @@
             background: rgba(239, 68, 68, 0.4);
         }
 
+        /* Fixed Calendar Styles */
         .calendar-header {
             display: flex;
             justify-content: space-between;
@@ -519,7 +530,7 @@
             color: var(--text-primary);
             width: 36px;
             height: 36px;
-            border-radius: 50%;
+            border-radius: 50%; /* Changed to circle */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -527,6 +538,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .calendar-nav::before {
@@ -547,6 +559,12 @@
         .calendar-nav:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .calendar-nav:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .calendar-days-container {
@@ -581,7 +599,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 50%; /* Changed to circle */
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -589,11 +607,18 @@
             position: relative;
             font-size: 0.9rem;
             min-height: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .calendar-day:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-day:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .calendar-day.current {
@@ -672,6 +697,7 @@
             text-align: center;
         }
 
+        /* Fixed Login Form Styles */
         .main-logo-container {
             text-align: center;
             margin-bottom: 25px;
@@ -712,7 +738,7 @@
 
         .logo-subtitle {
             color: #FDE68A;
-            font-size: 0.9rem;
+            font-size: 0.8rem; /* Reduced font size */
             margin-top: 8px;
             font-weight: 600;
             background: linear-gradient(45deg, #FDE68A, #FCD34D);
@@ -1302,7 +1328,7 @@
             animation: spin 1s linear infinite;
         }
 
-        /* Mobile Responsive */
+        /* Mobile Responsive - Fixed */
         @media (max-width: 1024px) {
             .content-container {
                 grid-template-columns: 1fr;
@@ -1323,6 +1349,7 @@
             .login-section {
                 grid-column: 1;
                 grid-row: 1;
+                margin-bottom: 20px; /* Added gap between login form and calculator */
             }
             
             .glass-card,
@@ -1348,6 +1375,56 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 8px 20px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .nav-left {
+                order: 1;
+                flex: 1;
+            }
+            
+            .nav-controls {
+                order: 2;
+                gap: 6px;
+            }
+            
+            .nav-center {
+                order: 3;
+                flex: 1 1 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+            
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-links a {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+            
+            .capsule-toggle {
+                width: 65px;
+                height: 28px;
+            }
+            
+            .nav-brand {
+                font-size: 1.3rem;
+            }
+            
+            .logo-circle {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-circle i {
+                font-size: 14px;
+            }
+            
             .content-container {
                 gap: 15px;
             }
@@ -1370,20 +1447,6 @@
                 font-size: 1.1rem;
             }
             
-            .navbar {
-                padding: 8px 20px;
-                flex-wrap: wrap;
-            }
-            
-            .nav-links {
-                gap: 12px;
-            }
-            
-            .nav-links a {
-                font-size: 13px;
-                padding: 6px 12px;
-            }
-
             .footer {
                 padding: 20px 15px 15px;
             }
@@ -1399,6 +1462,11 @@
 
             .footer-tutorial-items {
                 grid-template-columns: 1fr;
+            }
+            
+            /* Ensure login form inputs are visible on mobile */
+            .form-control {
+                font-size: 16px; /* Prevents zoom on iOS */
             }
         }
 
@@ -1420,6 +1488,18 @@
             }
 
             .footer-social-icons {
+                justify-content: center;
+            }
+            
+            /* Fix for Google Play and App Store buttons on mobile */
+            .footer-app-badges {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-app-badge {
+                flex: 1;
+                margin: 0 5px;
                 justify-content: center;
             }
         }
