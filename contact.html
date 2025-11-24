@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Android Chrome Theme Color -->
-    <meta name="theme-color" content="#0f1324" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0b0e1a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f0fdf4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
     
     <title>PocketHisab - Contact Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,16 +23,6 @@
         .pricing-price {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        /* Backdrop filter fix */
-        .navbar,
-        .glass-card,
-        .contact-form,
-        .contact-info,
-        .summary-section,
-        .faq-section {
-            -webkit-backdrop-filter: blur(20px);
         }
 
         /* Animation fixes */
@@ -60,7 +50,7 @@
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
             --text-muted: #718096;
-            --nav-bg: rgba(255, 255, 255, 0.92);
+            --nav-bg: rgba(255, 255, 255, 0.85);
             --input-bg: rgba(255, 255, 255, 0.95);
             --input-focus: rgba(255, 255, 255, 1);
             --success-bg: rgba(34, 197, 94, 0.15);
@@ -85,7 +75,7 @@
             --text-primary: #f7fafc;
             --text-secondary: #e2e8f0;
             --text-muted: #a0aec0;
-            --nav-bg: rgba(10, 10, 10, 0.92);
+            --nav-bg: rgba(10, 10, 10, 0.85);
             --input-bg: rgba(26, 32, 44, 0.9);
             --input-focus: rgba(45, 55, 72, 0.95);
             --success-bg: rgba(34, 197, 94, 0.2);
@@ -141,6 +131,16 @@
             50% { background-position: 100% 50%; }
             75% { background-position: 50% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* Performance: Disable heavy effects on mobile */
+        @media (max-width: 768px) {
+            .accounting-animation {
+                display: none;
+            }
+            body, html {
+                animation: none;
+            }
         }
 
         /* Accounting Animation Background */
@@ -306,7 +306,6 @@
         /* Navigation Bar */
         .navbar {
             background: var(--nav-bg);
-            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
             padding: 12px 30px;
             position: fixed;
@@ -662,7 +661,6 @@
         /* Contact Info */
         .contact-info {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
             border-radius: 20px;
             border: 1px solid var(--glass-border);
             padding: 30px;
@@ -754,7 +752,6 @@
         /* Contact Form */
         .contact-form {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
             border-radius: 20px;
             border: 1px solid var(--glass-border);
             padding: 30px;
@@ -809,18 +806,18 @@
             font-family: inherit;
         }
 
-        [data-theme="dark"] .form-control {
+        [data-theme="dark"] .form-control, [data-theme="dark"] .form-control:focus-visible {
             border: 1.5px solid rgba(160, 174, 192, 0.1);
         }
 
-        .form-control:focus {
+        .form-control:focus-visible {
             outline: none;
             background: var(--input-focus);
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
         }
 
-        [data-theme="dark"] .form-control:focus {
+        [data-theme="dark"] .form-control:focus-visible {
             box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.1);
         }
 
@@ -1319,6 +1316,16 @@
             
             .nav-brand {
                 font-size: 1.1rem;
+            }
+        }
+
+        /* Performance: Enable blur effect only on larger screens */
+        @media (min-width: 769px) {
+            .navbar,
+            .contact-info,
+            .contact-form {
+                -webkit-backdrop-filter: blur(20px);
+                backdrop-filter: blur(20px);
             }
         }
     </style>
