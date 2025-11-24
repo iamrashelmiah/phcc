@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketHisab - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7C3AED, #2563EB);
+            --secondary-gradient: linear-gradient(135deg, #2563EB, #0D9488);
+            --background-gradient: linear-gradient(45deg, #7C3AED, #2563EB, #0D9488, #7C3AED);
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 25px 50px rgba(124, 58, 237, 0.2);
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --nav-bg: rgba(255, 255, 255, 0.15);
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-focus: rgba(255, 255, 255, 0.15);
+            --success-bg: rgba(34, 197, 94, 0.25);
+            --error-bg: rgba(239, 68, 68, 0.25);
+            --info-bg: rgba(59, 130, 246, 0.25);
+            --nav-text: rgba(255, 255, 255, 0.9);
+            --nav-text-hover: #FFFFFF;
+            --nav-text-active: #FDE68A;
+            --footer-bg: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --primary-gradient: linear-gradient(135deg, #8B5CF6, #3B82F6);
+            --secondary-gradient: linear-gradient(135deg, #3B82F6, #0D9488);
+            --background-gradient: linear-gradient(45deg, #222831, #222831, #3B0270, #222831);
+            --glass-bg: rgba(34, 40, 49, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 25px 50px rgba(59, 2, 112, 0.3);
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.75);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --nav-bg: rgba(34, 40, 49, 0.4);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-focus: rgba(255, 255, 255, 0.12);
+            --success-bg: rgba(34, 197, 94, 0.3);
+            --error-bg: rgba(239, 68, 68, 0.3);
+            --info-bg: rgba(59, 130, 246, 0.3);
+            --footer-bg: rgba(34, 40, 49, 0.5);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-gradient);
+            background-size: 400% 400%;
+            animation: gradientAnimation 25s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: env(safe-area-inset-bottom);
+            position: relative;
+            transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .accounting-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.3);
+            animation: floatCurrency 15s linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatCurrency {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .calculator-icon {
+            position: absolute;
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.25);
+            animation: floatCalculator 20s linear infinite;
+        }
+
+        @keyframes floatCalculator {
+            0% { transform: translateX(-100px) translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateX(100vw) translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1400;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animated-gradient-text {
+            background: linear-gradient(120deg, #ffffff, #C4B5FD, #93C5FD, #ffffff);
+            background-size: 240% 240%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 10px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+        }
+
+        .logo-circle i {
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--nav-text), #C4B5FD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            color: var(--nav-text-hover);
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: var(--nav-text-active);
+            font-weight: 700;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .capsule-toggle {
+            width: 70px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2px;
+            cursor: pointer;
+            position: relative;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .capsule-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .capsule-toggle:hover::before {
+            left: 100%;
+        }
+
+        .capsule-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .toggle-thumb {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--nav-text);
+            transition: all 0.3s ease;
+            z-index: 2;
+            border-radius: 18px;
+        }
+
+        .toggle-thumb.active {
+            color: white;
+            background: var(--primary-gradient);
+        }
+
+        .toggle-icon {
+            font-size: 12px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 80px;
+        }
+
+        .content-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1300px;
+            align-items: start;
+        }
+
+        /* Desktop Layout */
+        .calculator-section {
+            grid-column: 1;
+        }
+
+        .calendar-section {
+            grid-column: 2;
+        }
+
+        .login-section {
+            grid-column: 3;
+        }
+
+        .glass-card,
+        .calendar-card,
+        .calculator-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            width: 100%;
+            height: 520px;
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .glass-card::before,
+        .calendar-card::before,
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #7C3AED, #2563EB, #0D9488, #7C3AED);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+            z-index: -1;
+            border-radius: 22px;
+            opacity: 0.6;
+        }
+
+        .calculator-display {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: right;
+            color: var(--text-primary);
+            overflow: hidden;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            flex: 1;
+        }
+
+        .calc-btn {
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .calc-btn:hover::before {
+            left: 100%;
+        }
+
+        .calc-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .calc-btn.operator {
+            background: rgba(124, 58, 237, 0.3);
+        }
+
+        .calc-btn.operator:hover {
+            background: rgba(124, 58, 237, 0.4);
+        }
+
+        .calc-btn.equals {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .calc-btn.equals:hover {
+            background: var(--primary-gradient);
+            filter: brightness(1.1);
+        }
+
+        .calc-btn.clear {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .calc-btn.clear:hover {
+            background: rgba(239, 68, 68, 0.4);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .calendar-month-year {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            flex: 1;
+        }
+
+        .calendar-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calendar-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .calendar-nav:hover::before {
+            left: 100%;
+        }
+
+        .calendar-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .calendar-days-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .weekday {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 8px 0;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            flex: 1;
+        }
+
+        .calendar-day {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            position: relative;
+            font-size: 0.9rem;
+            min-height: 40px;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .calendar-day.current {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
+        }
+
+        .calendar-day.other-month {
+            color: var(--text-muted);
+        }
+
+        .calendar-day.holiday {
+            background: rgba(239, 68, 68, 0.3);
+            color: #FCA5A5;
+            font-weight: 600;
+        }
+
+        .calendar-day.holiday::after {
+            content: '🎉';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 10px;
+        }
+
+        .calendar-day.holiday:hover {
+            background: rgba(239, 68, 68, 0.4);
+        }
+
+        .holiday-legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-holiday {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .legend-today {
+            background: var(--primary-gradient);
+        }
+
+        .holiday-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .main-logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .main-logo-circle {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 12px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .main-logo-circle i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ffffff, #C4B5FD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            color: #FDE68A;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #FDE68A, #FCD34D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(253, 230, 138, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 25px;
+            background: var(--input-bg);
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 1.5px solid transparent;
+            color: white;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: var(--input-focus);
+            border-color: #7C3AED;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 18px 0;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .remember-me:hover {
+            color: #A78BFA;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .remember-me input[type="checkbox"]:checked {
+            background: var(--primary-gradient);
+            border-color: #7C3AED;
+        }
+
+        .remember-me input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .forgot-password {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #A78BFA;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .signup-section {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .signup-link {
+            color: #FDE68A;
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .signup-link:hover {
+            color: #FCD34D;
+            transform: translateX(4px);
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 12px;
+            text-align: center;
+            display: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.success {
+            background: var(--success-bg);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+
+        .message.error {
+            background: var(--error-bg);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .message.info {
+            background: var(--info-bg);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .error-message {
+            color: #fca5a5;
+            font-size: 11px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--footer-bg);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 25px 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo-circle {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-circle i {
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer-brand-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--text-primary), #C4B5FD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-tagline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .footer-tutorials {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section-title i {
+            color: #FDE68A;
+            font-size: 0.9rem;
+        }
+
+        .footer-tutorial-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .footer-tutorial-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-tutorial-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .footer-tutorial-item:hover::before {
+            left: 100%;
+        }
+
+        .footer-tutorial-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(253, 230, 138, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-video-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .footer-video-icon i {
+            color: white;
+            font-size: 12px;
+        }
+
+        .footer-video-info {
+            flex: 1;
+        }
+
+        .footer-video-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .footer-video-duration {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .footer-apps-social {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-apps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-app-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-app-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-app-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .footer-app-badge:hover::before {
+            left: 100%;
+        }
+
+        .footer-app-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-app-badge-icon {
+            font-size: 16px;
+        }
+
+        .footer-app-badge-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-app-badge-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .footer-app-badge-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .footer-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1.5px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .footer-social-icon:hover::before {
+            left: 100%;
+        }
+
+        .footer-social-icon.whatsapp { background: rgba(37, 211, 102, 0.25); }
+        .footer-social-icon.telegram { background: rgba(0, 136, 204, 0.25); }
+        .footer-social-icon.facebook { background: rgba(59, 89, 152, 0.25); }
+        .footer-social-icon.instagram { background: rgba(225, 48, 108, 0.25); }
+        .footer-social-icon.email { background: rgba(219, 68, 55, 0.25); }
+
+        .footer-social-icon:hover {
+            transform: translateY(-2px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding-top: 15px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-spinner {
+            width: 45px;
+            height: 45px;
+            border: 2.5px solid transparent;
+            border-top: 2.5px solid #7C3AED;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .content-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 20px;
+            }
+            
+            .calculator-section {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            .calendar-section {
+                grid-column: 1;
+                grid-row: 3;
+            }
+            
+            .login-section {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .glass-card,
+            .calendar-card,
+            .calculator-card {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-tutorial-items {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-apps-social {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                gap: 15px;
+            }
+            
+            .glass-card,
+            .calendar-card,
+            .calculator-card {
+                padding: 20px;
+                min-height: 450px;
+            }
+            
+            .calculator-display {
+                font-size: 1.5rem;
+                min-height: 60px;
+                padding: 15px;
+            }
+            
+            .calc-btn {
+                min-height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .navbar {
+                padding: 8px 20px;
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-links a {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+
+            .footer {
+                padding: 20px 15px 15px;
+            }
+
+            .footer-content {
+                gap: 25px;
+            }
+
+            .footer-apps-social {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-tutorial-items {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 90px 15px 60px;
+            }
+
+            .footer {
+                padding: 15px 12px 12px;
+            }
+
+            .footer-tutorial-item {
+                padding: 6px 10px;
+            }
+
+            .footer-app-badge {
+                padding: 5px 10px;
+            }
+
+            .footer-social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="accounting-animation" id="accountingAnimation"></div>
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo-container">
+                <div class="logo-circle"><i class="fas fa-wallet"></i></div>
+                <div class="nav-brand animated-gradient-text">PocketHisab</div>
+            </div>
+        </div>
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="index.html" class="active" id="navHome">Home</a>
+                <a href="features.html" id="navFeatures">Features</a>
+                <a href="pricing.html" id="navPricing">Pricing</a>
+                <a href="contact.html" id="navContact">Contact</a>
+            </div>
+        </div>
+        <div class="nav-controls">
+            <div class="capsule-toggle" id="darkModeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb"><span class="toggle-icon">☀️</span></div>
+                    <div class="toggle-thumb"><span class="toggle-icon">🌙</span></div>
+                </div>
+            </div>
+            <div class="capsule-toggle" id="languageToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb"><span class="toggle-icon">EN</span></div>
+                    <div class="toggle-thumb"><span class="toggle-icon">BN</span></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="content-container">
+            <!-- Calculator - Left -->
+            <div class="calculator-section">
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <div class="calculator-title" id="calculatorTitle">Calculator</div>
+                    </div>
+                    <div class="calculator-display" id="calcDisplay">0</div>
+                    <div class="calculator-buttons">
+                        <button class="calc-btn clear" onclick="clearCalculator()">C</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('/')">/</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('*')">×</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
+                        <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+                        <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+                        <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
+                        <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+                        <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+                        <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+                        <button class="calc-btn equals" onclick="calculateResult()" style="grid-row: span 2;">=</button>
+                        <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+                        <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+                        <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+                        <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+                        <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar - Middle -->
+            <div class="calendar-section">
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                        <div class="calendar-month-year" id="calendarMonthYear"></div>
+                        <button class="calendar-nav" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-days-container">
+                        <div class="calendar-weekdays" id="calendarWeekdays"></div>
+                        <div class="calendar-days" id="calendarDays"></div>
+                    </div>
+                    <div class="holiday-legend">
+                        <div class="legend-item">
+                            <div class="legend-color legend-today"></div>
+                            <span id="todayLabel">Today</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color legend-holiday"></div>
+                            <span id="holidayLabel">Holiday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login - Right -->
+            <div class="login-section">
+                <div class="glass-card">
+                    <div class="main-logo-container">
+                        <div class="main-logo-circle"><i class="fas fa-wallet"></i></div>
+                        <div class="logo-text animated-gradient-text">PocketHisab</div>
+                        <div class="logo-subtitle" id="saveMoneyText">Save Money for Future</div>
+                    </div>
+
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email" id="emailLabel">Email or Mobile</label>
+                            <input type="text" id="email" class="form-control" placeholder="Enter your email or mobile" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" id="passwordLabel">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                                <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                            </div>
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+                        <div class="form-links">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <span id="rememberMeText">Remember Me</span>
+                            </label>
+                            <a href="forgot-password.html" class="forgot-password" id="forgotPassword">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="loginBtn">Login to Account</button>
+                    </form>
+
+                    <div class="signup-section">
+                        <span id="noAccountText">Don't have an account? </span>
+                        <a href="signup.html" class="signup-link" id="signUpLink">Create Account →</a>
+                    </div>
+
+                    <div id="message" class="message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-circle">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="footer-brand-text">PocketHisab</div>
+                </div>
+                <div class="footer-tagline" id="footerTagline">
+                    Your smart accounting companion for better financial management
+                </div>
+            </div>
+
+            <!-- Tutorials Section -->
+            <div class="footer-tutorials">
+                <div class="footer-section-title">
+                    <i class="fas fa-play-circle"></i>
+                    <span id="footerTutorialTitle">Quick Tutorials</span>
+                </div>
+                <div class="footer-tutorial-items">
+                    <div class="footer-tutorial-item" onclick="openVideoModal('Getting Started with PocketHisab')">
+                        <div class="footer-video-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="footer-video-info">
+                            <div class="footer-video-title" id="footerVideo1Title">Getting Started</div>
+                            <div class="footer-video-duration">3:25 min</div>
+                        </div>
+                    </div>
+                    <div class="footer-tutorial-item" onclick="openVideoModal('How to Track Expenses')">
+                        <div class="footer-video-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="footer-video-info">
+                            <div class="footer-video-title" id="footerVideo2Title">Track Expenses</div>
+                            <div class="footer-video-duration">4:10 min</div>
+                        </div>
+                    </div>
+                    <div class="footer-tutorial-item" onclick="openVideoModal('Generating Reports')">
+                        <div class="footer-video-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="footer-video-info">
+                            <div class="footer-video-title" id="footerVideo3Title">Generate Reports</div>
+                            <div class="footer-video-duration">5:45 min</div>
+                        </div>
+                    </div>
+                    <div class="footer-tutorial-item" onclick="openVideoModal('Tax Management')">
+                        <div class="footer-video-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="footer-video-info">
+                            <div class="footer-video-title" id="footerVideo4Title">Tax Management</div>
+                            <div class="footer-video-duration">6:20 min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apps & Social Section -->
+            <div class="footer-apps-social">
+                <div class="footer-apps">
+                    <div class="footer-section-title">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span id="footerAppTitle">Get Our App</span>
+                    </div>
+                    <div class="footer-app-badges">
+                        <a href="#" class="footer-app-badge">
+                            <i class="fab fa-google-play footer-app-badge-icon"></i>
+                            <div class="footer-app-badge-text">
+                                <div class="footer-app-badge-label" id="footerGetItOnLabel">GET IT ON</div>
+                                <div class="footer-app-badge-name">Google Play</div>
+                            </div>
+                        </a>
+                        <a href="#" class="footer-app-badge">
+                            <i class="fab fa-apple footer-app-badge-icon"></i>
+                            <div class="footer-app-badge-text">
+                                <div class="footer-app-badge-label" id="footerDownloadOnLabel">Download on the</div>
+                                <div class="footer-app-badge-name">App Store</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-social">
+                    <div class="footer-section-title">
+                        <i class="fas fa-share-alt"></i>
+                        <span id="footerSocialTitle">Connect With Us</span>
+                    </div>
+                    <div class="footer-social-icons">
+                        <a href="#" class="footer-social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="footer-social-icon telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="footer-social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-icon email"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div id="footerCopyright"></div>
+        </div>
+    </footer>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // All JavaScript code remains the same as previous version
+        // Just removed password strength functionality
+        
+        let isDarkMode = false;
+        let isEnglish = true;
+        let currentDate = new Date();
+        let calculatorDisplay = "0";
+        let shouldResetDisplay = false;
+
+        const bangladeshHolidays = {
+            2024: {
+                1: [1],
+                2: [21],
+                3: [17, 26],
+                4: [10, 11, 12, 13, 14],
+                5: [1],
+                6: [16, 17],
+                7: [],
+                8: [15],
+                9: [],
+                10: [6, 7],
+                11: [27],
+                12: [16]
+            },
+            2025: {
+                1: [1],
+                2: [21],
+                3: [17, 26],
+                4: [1, 2, 3, 4, 5],
+                5: [1],
+                6: [7, 8],
+                7: [],
+                8: [15],
+                9: [],
+                10: [24, 25],
+                11: [16],
+                12: [16]
+            }
+        };
+
+        const translations = {
+            en: {
+                title: "PocketHisab - Login",
+                home: "Home",
+                features: "Features",
+                pricing: "Pricing",
+                contact: "Contact",
+                login: "Login to Account",
+                emailLabel: "Email or Mobile",
+                passwordLabel: "Password",
+                emailPlaceholder: "Enter your email or mobile",
+                passwordPlaceholder: "Enter your password",
+                rememberMe: "Remember Me",
+                forgotPassword: "Forgot Password?",
+                noAccount: "Don't have an account?",
+                createAccount: "Create Account →",
+                saveMoney: "Save Money for Future",
+                loginSuccess: "✅ Login successful! Welcome to PocketHisab!",
+                darkMode: "Dark mode activated",
+                lightMode: "Light mode activated",
+                englishSelected: "English language selected",
+                banglaSelected: "বাংলা ভাষা নির্বাচন করা হয়েছে",
+                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                calculatorTitle: "Calculator",
+                todayLabel: "Today",
+                holidayLabel: "Holiday",
+                footerTagline: "Your smart accounting companion for better financial management",
+                footerTutorialTitle: "Quick Tutorials",
+                footerVideo1Title: "Getting Started",
+                footerVideo2Title: "Track Expenses", 
+                footerVideo3Title: "Generate Reports",
+                footerVideo4Title: "Tax Management",
+                footerAppTitle: "Get Our App",
+                footerGetItOnLabel: "GET IT ON",
+                footerDownloadOnLabel: "Download on the",
+                footerSocialTitle: "Connect With Us"
+            },
+            bn: {
+                title: "পকেটহিসাব - লগইন",
+                home: "হোম",
+                features: "ফিচারসমূহ",
+                pricing: "মূল্য",
+                contact: "যোগাযোগ",
+                login: "অ্যাকাউন্টে লগইন করুন",
+                emailLabel: "ইমেইল বা মোবাইল",
+                passwordLabel: "পাসওয়ার্ড",
+                emailPlaceholder: "আপনার ইমেইল বা মোবাইল দিন",
+                passwordPlaceholder: "আপনার পাসওয়ার্ড দিন",
+                rememberMe: "আমাকে মনে রাখুন",
+                forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
+                noAccount: "অ্যাকাউন্ট নেই?",
+                createAccount: "অ্যাকাউন্ট তৈরি করুন →",
+                saveMoney: "ভবিষ্যতের জন্য টাকা সঞ্চয় করুন",
+                loginSuccess: "✅ লগইন সফল! পকেটহিসাবে স্বাগতম!",
+                darkMode: "ডার্ক মোড সক্রিয় করা হয়েছে",
+                lightMode: "লাইট মোড সক্রিয় করা হয়েছে",
+                englishSelected: "English language selected",
+                banglaSelected: "বাংলা ভাষা নির্বাচন করা হয়েছে",
+                months: ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"],
+                weekdays: ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহস্পতি", "শুক্র", "শনি"],
+                calculatorTitle: "ক্যালকুলেটর",
+                todayLabel: "আজ",
+                holidayLabel: "ছুটি",
+                footerTagline: "ভালো আর্থিক ব্যবস্থাপনার জন্য আপনার স্মার্ট অ্যাকাউন্টিং সঙ্গী",
+                footerTutorialTitle: "দ্রুত টিউটোরিয়াল",
+                footerVideo1Title: "শুরু করুন",
+                footerVideo2Title: "খরচ ট্র্যাক করুন",
+                footerVideo3Title: "রিপোর্ট তৈরি করুন",
+                footerVideo4Title: "ট্যাক্স ব্যবস্থাপনা",
+                footerAppTitle: "আমাদের অ্যাপ পান",
+                footerGetItOnLabel: "এটি পেতে",
+                footerDownloadOnLabel: "ডাউনলোড করুন",
+                footerSocialTitle: "আমাদের সাথে যুক্ত হোন"
+            }
+        };
+
+        function createAccountingAnimation() {
+            const animationContainer = document.getElementById('accountingAnimation');
+            const symbols = ['৳', '₹', '$', '€', '£', '¥', '৳', '৳', '৳'];
+            
+            symbols.forEach((symbol, index) => {
+                const element = document.createElement('div');
+                element.className = `currency-symbol ${symbol === '৳' ? 'taka' : ''}`;
+                element.textContent = symbol;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 15}s`;
+                element.style.fontSize = `${20 + Math.random() * 20}px`;
+                animationContainer.appendChild(element);
+            });
+            
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.className = 'calculator-icon';
+                element.textContent = '🧮';
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                animationContainer.appendChild(element);
+            }
+        }
+
+        function updateCalculatorDisplay() {
+            document.getElementById('calcDisplay').textContent = calculatorDisplay;
+        }
+
+        function appendToDisplay(value) {
+            if (shouldResetDisplay) {
+                calculatorDisplay = "";
+                shouldResetDisplay = false;
+            }
+            
+            if (calculatorDisplay === "0" && value !== ".") {
+                calculatorDisplay = value;
+            } else {
+                calculatorDisplay += value;
+            }
+            
+            updateCalculatorDisplay();
+        }
+
+        function clearCalculator() {
+            calculatorDisplay = "0";
+            shouldResetDisplay = false;
+            updateCalculatorDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                let expression = calculatorDisplay.replace(/×/g, '*');
+                let result = eval(expression);
+                
+                if (!isFinite(result)) {
+                    calculatorDisplay = "Error";
+                } else {
+                    calculatorDisplay = result.toString();
+                }
+                
+                shouldResetDisplay = true;
+                updateCalculatorDisplay();
+            } catch (error) {
+                calculatorDisplay = "Error";
+                shouldResetDisplay = true;
+                updateCalculatorDisplay();
+            }
+        }
+
+        function renderCalendar() {
+            const monthYearElement = document.getElementById('calendarMonthYear');
+            const weekdaysElement = document.getElementById('calendarWeekdays');
+            const daysElement = document.getElementById('calendarDays');
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const today = new Date();
+            
+            const t = translations[isEnglish ? 'en' : 'bn'];
+            monthYearElement.textContent = `${t.months[month]} ${year}`;
+            
+            weekdaysElement.innerHTML = '';
+            t.weekdays.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'weekday';
+                dayElement.textContent = day;
+                weekdaysElement.appendChild(dayElement);
+            });
+            
+            daysElement.innerHTML = '';
+            
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day other-month';
+                daysElement.appendChild(emptyDay);
+            }
+            
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayElement.classList.add('current');
+                }
+                
+                const holidaysThisMonth = bangladeshHolidays[year] && bangladeshHolidays[year][month + 1];
+                if (holidaysThisMonth && holidaysThisMonth.includes(day)) {
+                    dayElement.classList.add('holiday');
+                    
+                    const holidayName = getHolidayName(month + 1, day, year);
+                    dayElement.setAttribute('data-holiday', holidayName);
+                    
+                    dayElement.addEventListener('mouseenter', function(e) {
+                        showHolidayTooltip(e, holidayName);
+                    });
+                    
+                    dayElement.addEventListener('mouseleave', function() {
+                        hideHolidayTooltip();
+                    });
+                }
+                
+                daysElement.appendChild(dayElement);
+            }
+        }
+
+        function getHolidayName(month, day, year) {
+            const holidayNames = {
+                '1-1': 'New Year\'s Day',
+                '2-21': 'International Mother Language Day',
+                '3-17': 'Sheikh Mujibur Rahman\'s Birthday',
+                '3-26': 'Independence Day',
+                '5-1': 'May Day',
+                '8-15': 'National Mourning Day',
+                '12-16': 'Victory Day'
+            };
+            
+            if (month === 4 && day >= 10 && day <= 14) return 'Eid-ul-Fitr';
+            if (month === 6 && (day === 16 || day === 17)) return 'Eid-ul-Adha';
+            if (month === 10 && (day === 6 || day === 7)) return 'Durga Puja';
+            if (month === 11 && day === 27) return 'Eid-e-Milad-un-Nabi';
+            
+            return holidayNames[`${month}-${day}`] || 'Public Holiday';
+        }
+
+        function showHolidayTooltip(event, holidayName) {
+            hideHolidayTooltip();
+            
+            const tooltip = document.createElement('div');
+            tooltip.className = 'holiday-tooltip';
+            tooltip.textContent = holidayName;
+            tooltip.style.left = (event.pageX + 10) + 'px';
+            tooltip.style.top = (event.pageY - 30) + 'px';
+            tooltip.id = 'holidayTooltip';
+            
+            document.body.appendChild(tooltip);
+            
+            setTimeout(() => {
+                tooltip.style.opacity = '1';
+            }, 10);
+        }
+
+        function hideHolidayTooltip() {
+            const existingTooltip = document.getElementById('holidayTooltip');
+            if (existingTooltip) {
+                existingTooltip.remove();
+            }
+        }
+
+        function updateLanguage(lang) {
+            const t = translations[lang];
+            
+            document.getElementById('navHome').textContent = t.home;
+            document.getElementById('navFeatures').textContent = t.features;
+            document.getElementById('navPricing').textContent = t.pricing;
+            document.getElementById('navContact').textContent = t.contact;
+            
+            document.getElementById('emailLabel').textContent = t.emailLabel;
+            document.getElementById('passwordLabel').textContent = t.passwordLabel;
+            document.getElementById('email').placeholder = t.emailPlaceholder;
+            document.getElementById('password').placeholder = t.passwordPlaceholder;
+            
+            document.getElementById('rememberMeText').textContent = t.rememberMe;
+            document.getElementById('forgotPassword').textContent = t.forgotPassword;
+            document.getElementById('loginBtn').textContent = t.login;
+            document.getElementById('noAccountText').textContent = t.noAccount + " ";
+            document.getElementById('signUpLink').innerHTML = t.createAccount;
+            document.getElementById('saveMoneyText').textContent = t.saveMoney;
+            
+            document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
+            document.getElementById('todayLabel').textContent = t.todayLabel;
+            document.getElementById('holidayLabel').textContent = t.holidayLabel;
+            
+            document.getElementById('footerTagline').textContent = t.footerTagline;
+            document.getElementById('footerTutorialTitle').textContent = t.footerTutorialTitle;
+            document.getElementById('footerVideo1Title').textContent = t.footerVideo1Title;
+            document.getElementById('footerVideo2Title').textContent = t.footerVideo2Title;
+            document.getElementById('footerVideo3Title').textContent = t.footerVideo3Title;
+            document.getElementById('footerVideo4Title').textContent = t.footerVideo4Title;
+            document.getElementById('footerAppTitle').textContent = t.footerAppTitle;
+            document.getElementById('footerGetItOnLabel').textContent = t.footerGetItOnLabel;
+            document.getElementById('footerDownloadOnLabel').textContent = t.footerDownloadOnLabel;
+            document.getElementById('footerSocialTitle').textContent = t.footerSocialTitle;
+            
+            document.title = t.title;
+            
+            renderCalendar();
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = event.target;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁️';
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        function showMessage(text, type) {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.className = 'message ' + type;
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(field, message) {
+            const errorElement = document.getElementById(field + 'Error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function clearError(field) {
+            const errorElement = document.getElementById(field + 'Error');
+            errorElement.textContent = '';
+            errorElement.style.display = 'none';
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const mobileRegex = /^01[3-9]\d{8}$/;
+            return emailRegex.test(email) || mobileRegex.test(email);
+        }
+
+        document.getElementById('darkModeToggle').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const isRightClick = clickX > rect.width / 2;
+            
+            if (isRightClick) {
+                isDarkMode = true;
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateDarkModeToggle(true);
+                const message = isEnglish ? translations.en.darkMode : translations.bn.darkMode;
+                showMessage(message, 'success');
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                isDarkMode = false;
+                document.documentElement.removeAttribute('data-theme');
+                updateDarkModeToggle(false);
+                const message = isEnglish ? translations.en.lightMode : translations.bn.lightMode;
+                showMessage(message, 'success');
+                localStorage.setItem('darkMode', 'false');
+            }
+        });
+
+        document.getElementById('languageToggle').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const isRightClick = clickX > rect.width / 2;
+            
+            if (isRightClick) {
+                isEnglish = false;
+                updateLanguage('bn');
+                updateLanguageToggle(false);
+                showMessage(translations.bn.banglaSelected, 'success');
+                localStorage.setItem('language', 'bn');
+            } else {
+                isEnglish = true;
+                updateLanguage('en');
+                updateLanguageToggle(true);
+                showMessage(translations.en.englishSelected, 'success');
+                localStorage.setItem('language', 'en');
+            }
+        });
+
+        function updateDarkModeToggle(isDark) {
+            const thumbs = document.querySelectorAll('#darkModeToggle .toggle-thumb');
+            thumbs[0].classList.toggle('active', !isDark);
+            thumbs[1].classList.toggle('active', isDark);
+        }
+
+        function updateLanguageToggle(isEnglish) {
+            const thumbs = document.querySelectorAll('#languageToggle .toggle-thumb');
+            thumbs[0].classList.toggle('active', isEnglish);
+            thumbs[1].classList.toggle('active', !isEnglish);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            clearError('email');
+            clearError('password');
+            
+            let isValid = true;
+            
+            if (!email) {
+                const errorText = isEnglish ? 'Email or mobile number is required' : 'ইমেইল বা মোবাইল নম্বর প্রয়োজন';
+                showError('email', errorText);
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                const errorText = isEnglish ? 'Please enter a valid email or mobile number' : 'সঠিক ইমেইল বা মোবাইল নম্বর দিন';
+                showError('email', errorText);
+                isValid = false;
+            }
+            
+            if (!password) {
+                const errorText = isEnglish ? 'Password is required' : 'পাসওয়ার্ড প্রয়োজন';
+                showError('password', errorText);
+                isValid = false;
+            } else if (password.length < 6) {
+                const errorText = isEnglish ? 'Password must be at least 6 characters long' : 'পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে';
+                showError('password', errorText);
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                const errorText = isEnglish ? 'Please fix the errors above' : 'উপরের ভুলগুলি ঠিক করুন';
+                showMessage(errorText, 'error');
+                return;
+            }
+            
+            loginBtn.classList.add('btn-loading');
+            loginBtn.disabled = true;
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                loginBtn.classList.remove('btn-loading');
+                loginBtn.disabled = false;
+                
+                const successText = isEnglish ? translations.en.loginSuccess : translations.bn.loginSuccess;
+                showMessage(successText, 'success');
+            }, 2000);
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            if (email && !validateEmail(email)) {
+                const errorText = isEnglish ? 'Please enter a valid email or mobile number' : 'সঠিক ইমেইল বা মোবাইল নম্বর দিন';
+                showError('email', errorText);
+            } else {
+                clearError('email');
+            }
+        });
+
+        document.getElementById('password').addEventListener('blur', function() {
+            const password = this.value;
+            if (password && password.length < 6) {
+                const errorText = isEnglish ? 'Password must be at least 6 characters' : 'পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে';
+                showError('password', errorText);
+            } else {
+                clearError('password');
+            }
+        });
+
+        document.getElementById('prevMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 240) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        function openVideoModal(title) {
+            alert(`Video Tutorial: ${title}\n\nThis would open a video player in a real application.`);
+        }
+
+        function updateFooterCopyright() {
+            const currentYear = new Date().getFullYear();
+            const copyrightText = isEnglish ? 
+                `© ${currentYear} PocketHisab. All rights reserved.` : 
+                `© ${currentYear} পকেটহিসাব। সর্বস্বত্ব সংরক্ষিত।`;
+            document.getElementById('footerCopyright').textContent = copyrightText;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createAccountingAnimation();
+            
+            const savedDarkMode = localStorage.getItem('darkMode');
+            if (savedDarkMode === 'true') {
+                isDarkMode = true;
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            updateDarkModeToggle(isDarkMode);
+            
+            const savedLanguage = localStorage.getItem('language');
+            if (savedLanguage === 'bn') {
+                isEnglish = false;
+                updateLanguage('bn');
+            } else {
+                isEnglish = true;
+                updateLanguage('en');
+            }
+            updateLanguageToggle(isEnglish);
+
+            updateCalculatorDisplay();
+            renderCalendar();
+            updateFooterCopyright();
+
+            toggleBackToTop();
+            window.addEventListener('scroll', toggleBackToTop);
+
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            const welcomeText = isEnglish ? 'Welcome to PocketHisab! Ready to login.' : 'পকেটহিসাবে স্বাগতম! লগইন করতে প্রস্তুত।';
+            showMessage(welcomeText, 'info');
+        });
+    </script>
+</body>
+</html>
