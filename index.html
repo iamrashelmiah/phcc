@@ -454,6 +454,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .calc-btn::before {
@@ -539,6 +540,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .calendar-nav::before {
@@ -608,6 +610,7 @@
             font-size: 0.9rem;
             min-height: 40px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .calendar-day:hover {
@@ -778,6 +781,9 @@
             border: 1.5px solid transparent;
             color: white;
             font-family: inherit;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .form-control:focus {
@@ -846,6 +852,8 @@
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
 
         .remember-me input[type="checkbox"]:checked {
@@ -1468,11 +1476,16 @@
             .form-control {
                 font-size: 16px; /* Prevents zoom on iOS */
             }
+            
+            /* Fix for mobile view gap between navbar and login form */
+            .main-content {
+                padding-top: 120px;
+            }
         }
 
         @media (max-width: 480px) {
             .main-content {
-                padding: 90px 15px 60px;
+                padding: 120px 15px 60px;
             }
 
             .footer {
