@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Android Chrome Theme Color -->
-    <meta name="theme-color" content="#7C3AED" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#222831" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
     
     <title>PocketHisab - Features</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -44,59 +44,65 @@
             box-sizing: border-box;
         }
 
-        /* CSS Variables for Theming - MATCHING LOGIN PAGE COLORS */
+        /* CSS Variables for Theming - MATCHING CONTACT PAGE COLORS */
         :root {
-            /* Light Theme Colors - Purple */
-            --primary-gradient: linear-gradient(135deg, #7C3AED, #2563EB);
-            --secondary-gradient: linear-gradient(135deg, #2563EB, #0D9488);
-            --background-gradient: linear-gradient(45deg, #7C3AED, #2563EB, #0D9488, #7C3AED);
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --glass-shadow: 0 25px 50px rgba(124, 58, 237, 0.2);
-            --text-primary: rgba(255, 255, 255, 0.95);
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --nav-bg: rgba(255, 255, 255, 0.15);
-            --input-bg: rgba(255, 255, 255, 0.1);
-            --input-focus: rgba(255, 255, 255, 0.15);
-            --success-bg: rgba(34, 197, 94, 0.25);
-            --error-bg: rgba(239, 68, 68, 0.25);
-            --info-bg: rgba(59, 130, 246, 0.25);
-            --nav-text: rgba(255, 255, 255, 0.9);
-            --nav-text-hover: #FFFFFF;
-            --nav-text-active: #FDE68A;
+            /* Light Theme Colors - Green, Red, Orange Theme */
+            --primary-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            --secondary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --accent-gradient: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            --background-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.95);
+            --glass-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --nav-bg: rgba(255, 255, 255, 0.92);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --input-focus: rgba(255, 255, 255, 1);
+            --success-bg: rgba(34, 197, 94, 0.15);
+            --error-bg: rgba(220, 38, 38, 0.15);
+            --info-bg: rgba(249, 115, 22, 0.15);
+            --nav-text: #4a5568;
+            --nav-text-hover: #1a202c;
+            --nav-text-active: #16a34a;
+            --accent-color: #16a34a;
+            --accent-hover: #15803d;
         }
 
-        /* Dark Theme Colors - MATCHING LOGIN PAGE */
+        /* Dark Theme Colors - Pure Premium Dark */
         [data-theme="dark"] {
-            --primary-gradient: linear-gradient(135deg, #8B5CF6, #3B82F6);
-            --secondary-gradient: linear-gradient(135deg, #3B82F6, #0D9488);
-            --background-gradient: linear-gradient(45deg, #222831, #222831, #3B0270, #222831);
-            --glass-bg: rgba(34, 40, 49, 0.35);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-shadow: 0 25px 50px rgba(59, 2, 112, 0.3);
-            --text-primary: rgba(255, 255, 255, 0.95);
-            --text-secondary: rgba(255, 255, 255, 0.75);
-            --text-muted: rgba(255, 255, 255, 0.5);
-            --nav-bg: rgba(34, 40, 49, 0.4);
-            --input-bg: rgba(255, 255, 255, 0.08);
-            --input-focus: rgba(255, 255, 255, 0.12);
-            --success-bg: rgba(34, 197, 94, 0.3);
-            --error-bg: rgba(239, 68, 68, 0.3);
-            --info-bg: rgba(59, 130, 246, 0.3);
-            --nav-text: rgba(255, 255, 255, 0.9);
-            --nav-text-hover: #FFFFFF;
-            --nav-text-active: #FDE68A;
+            --primary-gradient: linear-gradient(135deg, #15803d 0%, #166534 100%);
+            --secondary-gradient: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            --accent-gradient: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+            --background-gradient: linear-gradient(135deg, #0A0A0A 0%, #1a202c 100%);
+            --glass-bg: rgba(15, 15, 15, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            --text-primary: #f7fafc;
+            --text-secondary: #e2e8f0;
+            --text-muted: #a0aec0;
+            --nav-bg: rgba(10, 10, 10, 0.92);
+            --input-bg: rgba(26, 32, 44, 0.9);
+            --input-focus: rgba(45, 55, 72, 0.95);
+            --success-bg: rgba(34, 197, 94, 0.2);
+            --error-bg: rgba(220, 38, 38, 0.2);
+            --info-bg: rgba(249, 115, 22, 0.2);
+            --nav-text: #e2e8f0;
+            --nav-text-hover: #f7fafc;
+            --nav-text-active: #a0aec0;
+            --accent-color: #15803d;
+            --accent-hover: #166534;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--background-gradient);
             background-size: 400% 400%;
             animation: gradientAnimation 25s ease infinite;
-            color: #333;
+            color: var(--text-primary);
             overflow-x: hidden;
             min-height: 100vh;
             min-height: 100svh;
@@ -134,7 +140,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Accounting Animation Background - ADDED FROM LOGIN PAGE */
+        /* Accounting Animation Background */
         .accounting-animation {
             position: fixed;
             top: 0;
@@ -149,9 +155,13 @@
         .currency-symbol {
             position: absolute;
             font-size: 24px;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(34, 197, 94, 0.15);
             animation: floatCurrency 15s linear infinite;
             user-select: none;
+        }
+
+        [data-theme="dark"] .currency-symbol {
+            color: rgba(160, 174, 192, 0.1);
         }
 
         .currency-symbol.taka {
@@ -178,8 +188,12 @@
         .calculator-icon {
             position: absolute;
             font-size: 28px;
-            color: rgba(255, 255, 255, 0.25);
+            color: rgba(34, 197, 94, 0.1);
             animation: floatCalculator 20s linear infinite;
+        }
+
+        [data-theme="dark"] .calculator-icon {
+            color: rgba(160, 174, 192, 0.08);
         }
 
         @keyframes floatCalculator {
@@ -202,8 +216,12 @@
         .chart-icon {
             position: absolute;
             font-size: 22px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(34, 197, 94, 0.08);
             animation: floatChart 25s linear infinite;
+        }
+
+        [data-theme="dark"] .chart-icon {
+            color: rgba(160, 174, 192, 0.06);
         }
 
         @keyframes floatChart {
@@ -240,7 +258,7 @@
             border: none;
             background: var(--primary-gradient);
             color: white;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -258,17 +276,22 @@
 
         .back-to-top:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 24px rgba(34, 197, 94, 0.3);
         }
 
         /* Animated Gradient Text */
         .animated-gradient-text {
-            background: linear-gradient(120deg, #ffffff, #C4B5FD, #93C5FD, #ffffff);
+            background: linear-gradient(120deg, #22c55e, #16a34a, #22c55e);
             background-size: 240% 240%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 8s ease infinite;
+        }
+
+        [data-theme="dark"] .animated-gradient-text {
+            background: linear-gradient(120deg, #f7fafc, #e2e8f0, #f7fafc);
+            background-size: 240% 240%;
         }
 
         @keyframes gradientShift {
@@ -282,7 +305,7 @@
             background: var(--nav-bg);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
-            padding: 10px 30px;
+            padding: 12px 30px;
             position: fixed;
             top: 0;
             left: 0;
@@ -293,7 +316,12 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            border-radius: 0 0 15px 15px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .navbar {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .nav-left {
@@ -316,14 +344,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
             border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
 
         .logo-circle:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
         }
 
         .logo-circle i {
@@ -334,11 +362,17 @@
         .nav-brand {
             font-size: 1.6rem;
             font-weight: 800;
-            background: linear-gradient(45deg, var(--nav-text), #C4B5FD);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] .nav-brand {
+            background: linear-gradient(45deg, #f7fafc, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-center {
@@ -367,7 +401,7 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
         }
 
         .nav-links a::before {
@@ -377,7 +411,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
             transition: left 0.5s ease;
         }
 
@@ -386,16 +420,23 @@
         }
 
         .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(34, 197, 94, 0.08);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             color: var(--nav-text-hover);
         }
 
+        [data-theme="dark"] .nav-links a:hover {
+            background: rgba(160, 174, 192, 0.1);
+        }
+
         .nav-links a.active {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(34, 197, 94, 0.12);
             color: var(--nav-text-active);
             font-weight: 700;
+        }
+
+        [data-theme="dark"] .nav-links a.active {
+            background: rgba(160, 174, 192, 0.15);
         }
 
         /* Toggle Controls */
@@ -409,15 +450,20 @@
         .capsule-toggle {
             width: 70px;
             height: 32px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(34, 197, 94, 0.08);
             border-radius: 20px;
             padding: 2px;
             cursor: pointer;
             position: relative;
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border: 1.5px solid rgba(34, 197, 94, 0.15);
             transition: all 0.3s ease;
             display: flex;
             overflow: hidden;
+        }
+
+        [data-theme="dark"] .capsule-toggle {
+            background: rgba(160, 174, 192, 0.1);
+            border: 1.5px solid rgba(160, 174, 192, 0.2);
         }
 
         .capsule-toggle::before {
@@ -436,9 +482,13 @@
         }
 
         .capsule-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(34, 197, 94, 0.12);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .capsule-toggle:hover {
+            background: rgba(160, 174, 192, 0.15);
         }
 
         .toggle-track {
@@ -470,6 +520,87 @@
             font-size: 12px;
         }
 
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 8px 20px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .nav-left {
+                order: 1;
+                flex: 1;
+            }
+            
+            .nav-controls {
+                order: 2;
+                gap: 6px;
+            }
+            
+            .nav-center {
+                order: 3;
+                flex: 1 1 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+            
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-links a {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+            
+            .capsule-toggle {
+                width: 65px;
+                height: 28px;
+            }
+            
+            .nav-brand {
+                font-size: 1.3rem;
+            }
+            
+            .logo-circle {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-circle i {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 6px 15px;
+            }
+            
+            .nav-links {
+                gap: 8px;
+            }
+            
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .capsule-toggle {
+                width: 60px;
+                height: 26px;
+            }
+            
+            .toggle-icon {
+                font-size: 10px;
+            }
+            
+            .nav-brand {
+                font-size: 1.1rem;
+            }
+        }
+
         /* Main Content */
         .main-content {
             min-height: 100vh;
@@ -487,12 +618,19 @@
         .page-title {
             font-size: 3rem;
             font-weight: 800;
-            background: linear-gradient(45deg, #ffffff, #C4B5FD);
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 15px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .page-title {
+            background: linear-gradient(45deg, #f7fafc, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-subtitle {
@@ -500,6 +638,7 @@
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         /* Features Grid */
@@ -526,25 +665,14 @@
             transform: translateY(30px);
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #7C3AED, #2563EB, #0D9488, #7C3AED);
-            background-size: 400% 400%;
-            animation: gradientAnimation 8s ease infinite;
-            z-index: -1;
-            border-radius: 20px;
-            opacity: 0.6;
-        }
-
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
-            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        [data-theme="dark"] .feature-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
         /* Rounded Feature Icons */
@@ -552,19 +680,19 @@
             width: 65px;
             height: 65px;
             background: var(--primary-gradient);
-            border-radius: 50%; /* Changed to 50% for perfect circle */
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 18px;
             font-size: 24px;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
             transition: all 0.3s ease;
         }
 
         .feature-card:hover .feature-icon {
             transform: scale(1.08);
-            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+            box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
         }
 
         .feature-title {
@@ -596,14 +724,14 @@
         }
 
         .feature-highlights li:hover {
-            color: #FDE68A;
+            color: var(--accent-color);
         }
 
         .feature-highlights li:before {
             content: "✓";
             position: absolute;
             left: 0;
-            color: #FDE68A;
+            color: var(--accent-color);
             font-weight: bold;
         }
 
@@ -618,21 +746,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .summary-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #7C3AED, #2563EB, #0D9488, #7C3AED);
-            background-size: 400% 400%;
-            animation: gradientAnimation 8s ease infinite;
-            z-index: -1;
-            border-radius: 20px;
-            opacity: 0.6;
         }
 
         .summary-title {
@@ -660,7 +773,7 @@
         .btn {
             padding: 14px 28px;
             border: none;
-            border-radius: 50px; /* Changed to 50px for capsule shape */
+            border-radius: 50px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
@@ -691,23 +804,40 @@
         .btn-primary {
             background: var(--primary-gradient);
             color: white;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+        }
+
+        [data-theme="dark"] .btn-primary {
+            box-shadow: 0 4px 12px rgba(160, 174, 192, 0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+        }
+
+        [data-theme="dark"] .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(160, 174, 192, 0.3);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(34, 197, 94, 0.08);
             color: var(--text-primary);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border: 1.5px solid rgba(34, 197, 94, 0.2);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(34, 197, 94, 0.12);
             transform: translateY(-2px);
+        }
+
+        [data-theme="dark"] .btn-secondary {
+            background: rgba(160, 174, 192, 0.1);
+            border: 1.5px solid rgba(160, 174, 192, 0.2);
+        }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            background: rgba(160, 174, 192, 0.15);
         }
 
         /* Message Box */
@@ -738,12 +868,20 @@
 
         .message.success {
             background: var(--success-bg);
-            color: #86efac;
+            color: #16a34a;
+        }
+
+        [data-theme="dark"] .message.success {
+            color: #22c55e;
         }
 
         .message.info {
             background: var(--info-bg);
-            color: #93c5fd;
+            color: #ea580c;
+        }
+
+        [data-theme="dark"] .message.info {
+            color: #fb923c;
         }
 
         /* Loading Animation */
@@ -766,7 +904,7 @@
             height: 50px;
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            border-top-color: #7C3AED;
+            border-top-color: #22c55e;
             animation: spin 1s ease-in-out infinite;
         }
 
@@ -903,7 +1041,7 @@
 </head>
 <body>
 
-    <!-- Accounting Animation Background - ADDED FROM LOGIN PAGE -->
+    <!-- Accounting Animation Background -->
     <div class="accounting-animation" id="accountingAnimation"></div>
 
     <!-- Back to Top Button -->
@@ -1378,7 +1516,7 @@
             }
         };
 
-        // Create accounting animation elements - ADDED FROM LOGIN PAGE
+        // Create accounting animation elements
         function createAccountingAnimation() {
             const animationContainer = document.getElementById('accountingAnimation');
             const symbols = ['৳', '₹', '$', '€', '£', '¥', '৳', '৳', '৳'];
@@ -1464,18 +1602,6 @@
             }, 4000);
         }
 
-        // Show loading function
-        function showLoading() {
-            const loading = document.createElement('div');
-            loading.className = 'loading';
-            loading.innerHTML = '<div class="loading-spinner"></div>';
-            document.body.appendChild(loading);
-            
-            setTimeout(() => {
-                loading.remove();
-            }, 500);
-        }
-
         // Update Toggle Visual State
         function updateDarkModeToggle(isDark) {
             const thumbs = document.querySelectorAll('#darkModeToggle .toggle-thumb');
@@ -1489,13 +1615,39 @@
             thumbs[1].classList.toggle('active', !isEnglish);
         }
 
-        // Navigation Links - কোন loader নেই
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // কোন loader নেই, সরাসরি redirect
-                window.location.href = this.getAttribute('href');
-            });
-        });
+        // Toggle Theme Function
+        function toggleTheme(isDark) {
+            if (isDark) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                isDarkMode = true;
+                updateDarkModeToggle(true);
+                showMessage(isEnglish ? translations.en.darkMode : translations.bn.darkMode, 'success');
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                isDarkMode = false;
+                updateDarkModeToggle(false);
+                showMessage(isEnglish ? translations.en.lightMode : translations.bn.lightMode, 'success');
+                localStorage.setItem('darkMode', 'false');
+            }
+        }
+
+        // Toggle Language Function
+        function toggleLanguage(isEnglishLang) {
+            if (isEnglishLang) {
+                isEnglish = true;
+                updateLanguage('en');
+                updateLanguageToggle(true);
+                showMessage(translations.en.englishSelected, 'success');
+                localStorage.setItem('language', 'en');
+            } else {
+                isEnglish = false;
+                updateLanguage('bn');
+                updateLanguageToggle(false);
+                showMessage(translations.bn.banglaSelected, 'success');
+                localStorage.setItem('language', 'bn');
+            }
+        }
 
         // Add click animation to feature cards
         document.querySelectorAll('.feature-card').forEach(card => {
@@ -1505,61 +1657,6 @@
                     this.style.transform = 'translateY(-8px)';
                 }, 150);
             });
-        });
-
-        // CTA buttons - সরাসরি redirect, কোন loader নেই
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                window.location.href = this.getAttribute('href');
-            });
-        });
-
-        // Dark Mode Toggle
-        document.getElementById('darkModeToggle').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const isRightClick = clickX > rect.width / 2;
-            
-            if (isRightClick) {
-                // Dark Mode
-                isDarkMode = true;
-                document.documentElement.setAttribute('data-theme', 'dark');
-                updateDarkModeToggle(true);
-                const message = isEnglish ? translations.en.darkMode : translations.bn.darkMode;
-                showMessage(message, 'success');
-                localStorage.setItem('darkMode', 'true');
-            } else {
-                // Light Mode
-                isDarkMode = false;
-                document.documentElement.removeAttribute('data-theme');
-                updateDarkModeToggle(false);
-                const message = isEnglish ? translations.en.lightMode : translations.bn.lightMode;
-                showMessage(message, 'success');
-                localStorage.setItem('darkMode', 'false');
-            }
-        });
-
-        // Language Toggle
-        document.getElementById('languageToggle').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const isRightClick = clickX > rect.width / 2;
-            
-            if (isRightClick) {
-                // Bangla
-                isEnglish = false;
-                updateLanguage('bn');
-                updateLanguageToggle(false);
-                showMessage(translations.bn.banglaSelected, 'success');
-                localStorage.setItem('language', 'bn');
-            } else {
-                // English
-                isEnglish = true;
-                updateLanguage('en');
-                updateLanguageToggle(true);
-                showMessage(translations.en.englishSelected, 'success');
-                localStorage.setItem('language', 'en');
-            }
         });
 
         // Show/hide back to top button
@@ -1574,28 +1671,25 @@
 
         // Page loaded successfully
         document.addEventListener('DOMContentLoaded', function() {
-            // Create accounting animation - ADDED FROM LOGIN PAGE
+            // Create accounting animation
             createAccountingAnimation();
             
             // Load dark mode preference
             const savedDarkMode = localStorage.getItem('darkMode');
             if (savedDarkMode === 'true') {
-                isDarkMode = true;
-                document.documentElement.setAttribute('data-theme', 'dark');
+                toggleTheme(true);
+            } else {
+                toggleTheme(false);
             }
-            updateDarkModeToggle(isDarkMode);
             
             // Load language preference
             const savedLanguage = localStorage.getItem('language');
             if (savedLanguage === 'bn') {
-                isEnglish = false;
-                updateLanguage('bn');
+                toggleLanguage(false);
             } else {
-                isEnglish = true;
-                updateLanguage('en');
+                toggleLanguage(true);
             }
-            updateLanguageToggle(isEnglish);
-            
+
             console.log('🎉 PocketHisab Features Page Loaded!');
             
             // Add animation to feature cards on load
@@ -1622,24 +1716,49 @@
             showMessage(welcomeText, 'info');
         });
 
+        // Dark Mode Toggle
+        document.getElementById('darkModeToggle').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const isRightClick = clickX > rect.width / 2;
+            
+            if (isRightClick) {
+                // Dark Mode
+                toggleTheme(true);
+            } else {
+                // Light Mode
+                toggleTheme(false);
+            }
+        });
+
+        // Language Toggle
+        document.getElementById('languageToggle').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const isRightClick = clickX > rect.width / 2;
+            
+            if (isRightClick) {
+                // Bangla
+                toggleLanguage(false);
+            } else {
+                // English
+                toggleLanguage(true);
+            }
+        });
+
         // Add keyboard shortcut for dark mode (Ctrl+D)
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'd') {
                 e.preventDefault();
-                isDarkMode = !isDarkMode;
-                if (isDarkMode) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    updateDarkModeToggle(true);
-                    const message = isEnglish ? translations.en.darkMode : translations.bn.darkMode;
-                    showMessage(message, 'success');
-                    localStorage.setItem('darkMode', 'true');
-                } else {
-                    document.documentElement.removeAttribute('data-theme');
-                    updateDarkModeToggle(false);
-                    const message = isEnglish ? translations.en.lightMode : translations.bn.lightMode;
-                    showMessage(message, 'success');
-                    localStorage.setItem('darkMode', 'false');
-                }
+                toggleTheme(!isDarkMode);
+            }
+        });
+
+        // Add keyboard shortcut for language toggle (Ctrl+L)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'l' || e.key === 'L')) {
+                e.preventDefault();
+                toggleLanguage(!isEnglish);
             }
         });
     </script>
